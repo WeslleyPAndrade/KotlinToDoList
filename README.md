@@ -1,2 +1,2 @@
 # KotlinToDoList
-Aprendendo o básico de Kotlin com Hibernate e 
+Aprendendo o básico de Kotlin com Hibernate e MySql
