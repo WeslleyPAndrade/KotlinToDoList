@@ -28,12 +28,28 @@ abstract class DAO<TModel,TEntity>(
         manager.transaction.commit()
     }
 
+    open fun update(model: TModel) {
+        val id =getIdFromModel(model)
+            if (id <= 0) {
+                throw IllegalArgumentException("ID inválido: $id")
+            }
+
+        val entity = searchById(id)
+        updateEntityFromModel(entity,model)
+        manager.transaction.begin()
+        manager.merge(entity)
+        manager.transaction.commit()
+    }
+
     open fun delete(id: Int) {
         val entity = searchById(id)
         manager.transaction.begin()
         manager.remove(entity)
         manager.transaction.commit()
     }
+
+    abstract fun getIdFromModel(model: TModel) : Int
+    abstract fun updateEntityFromModel(entity: TEntity,model: TModel)
 
 
 }

@@ -13,4 +13,16 @@ class TarefaDAO(manager: EntityManager): DAO<Tarefa,TarefaEntity>(manager,Tarefa
     override fun toModel(entity: TarefaEntity): Tarefa {
         return entity.toModel()
     }
+
+    override fun getIdFromModel(model: Tarefa): Int {
+        return model.id
+    }
+
+    override fun updateEntityFromModel(entity: TarefaEntity, model: Tarefa) {
+        entity.titulo = model.titulo
+        entity.descricao = model.descricao
+        entity.concluido = model.concluido
+    }
+
+
 }
